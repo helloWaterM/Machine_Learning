@@ -24,7 +24,8 @@ import math
 #这样可以通过不断输入inpDim和outDim构建
 def createLayer(A, inpDim, outDim):
     W = random.rand(outDim,inpDim)
-    Z = W.dot(A)
+    B = random.rand(outDim,1)
+    Z = W.dot(A) + B
     A = 1/(1+np.exp(-Z))
     return A
 
@@ -33,14 +34,23 @@ def main():
     #前向传播核心
     A0 = random.rand(3,1)
     W1 = random.rand(4,3)
-    Z1 = W1.dot(A0)
+    B1 = random.rand(4,1)
+    Z1 = W1.dot(A0) + B1
     A1 = 1/(1+np.exp(-Z1))
 
     W2 = random.rand(1,4)
     Z2 = W2.dot(A1)
     A2 = 1/(1+np.exp(-Z2))
 
-
+#反向传播
+'''
+    dZ2 = A2 - y
+    dW2 = dZ.dot(A1.T)
+    dB2 = dZ
+    dZ1 = W2.T.dot(dZ2).dot(g1).dot(Z1) #g1为g1'
+    dW1 = dZ1.dot(X.T)
+    dB1 = dZ1
+'''
 
 if __name__ == '__main__':
     main()
